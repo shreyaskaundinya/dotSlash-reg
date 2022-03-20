@@ -23,7 +23,21 @@ export default function App() {
     askForCameraPermission();
   }, []);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   async function fetchDataParticipant() {
+  //     setParticipantData(null);
+  //     setScanned(true);
+  //     const res = await getData(text);
+  //     setParticipantData(res.data[0]);
+  //   };
+  //   fetchDataParticipant();
+  // }, [text]);
+
+  // What happens when we scan the bar code
+  const handleBarCodeScanned = ({ type, data }) => {
+    setScanned(true);
+    setText(data);
+    console.log('Data: ' + data)
     async function fetchDataParticipant() {
       setParticipantData(null);
       setScanned(true);
@@ -31,13 +45,6 @@ export default function App() {
       setParticipantData(res.data[0]);
     };
     fetchDataParticipant();
-  }, [text]);
-
-  // What happens when we scan the bar code
-  const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
-    setText(data);
-    console.log('Data: ' + data)
   };
 
   // Check permissions and return the screens
@@ -75,6 +82,7 @@ export default function App() {
       <View style={styles.container}>
         <Text style={styles.participantText} key = "name">Name: {participantData.name}</Text>
         <Text style={styles.participantText} key = "team">Team: {participantData.team}</Text>
+        <Text style={styles.participantText} key = "registered" onPress = {() => toggleHandler("registered")}>Registered: {participantData.registered ? "Completed" : "Not Completed"}</Text>
         <Text style={styles.participantText} key = "breakfast" onPress = {() => toggleHandler("breakfast")}>Breakfast: {participantData.breakfast ? "Completed" : "Not Completed"}</Text>
         <Text style={styles.participantText} key = "lunch" onPress = {() => toggleHandler("lunch")}>Lunch: {participantData.lunch ? "Completed" : "Not Completed"}</Text>
         <Text style={styles.participantText} key = "snacks" onPress = {() => toggleHandler("snacks")}>Snacks: {participantData.snacks ? "Completed" : "Not Completed"}</Text>

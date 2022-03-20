@@ -8,6 +8,7 @@ export const updateData = async (id, participantData) => {
         const res = await axios.put(`${base_url}/participant/participant/${id}`, {
             _id: participantData._id,
             name: participantData.name,
+            registered: participantData.registered,
             breakfast: participantData.breakfast,
             lunch: participantData.lunch,
             snacks: participantData.snacks,
