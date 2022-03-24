@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "BarCodeApp",
-    "slug": "BarCodeApp",
+    "name": "Terrathon",
+    "slug": "Terrathon",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/stickman_square.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/stickman.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,17 +17,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cmsxalcoding.terrathon",
     },
     "android": {
       "package": "com.cmsxalcoding.terrathon",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/stickman_square.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/stickman.png"
     }
   }
 }

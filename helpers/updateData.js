@@ -3,7 +3,6 @@ import { confs } from '../configurations';
 
 export const updateData = async (id, participantData) => {
     const base_url = confs["base_url"];
-    console.log(base_url);
     try {
         const res = await axios.put(`${base_url}/participant/participant/${id}`, {
             _id: participantData._id,
@@ -17,8 +16,7 @@ export const updateData = async (id, participantData) => {
             review2: participantData.review2,
             review3: participantData.review3
         });
-        console.log(res);
-        return res.data;
+        return res;
     }
     catch(e) {
         console.log(e);

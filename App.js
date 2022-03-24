@@ -68,10 +68,17 @@ export default function App() {
 
   const toggleHandler = (val) => {
     participantData[val] = !participantData[val];
+    console.log(val, participantData[val]);
+    setParticipantData({...participantData});
   }
 
-  const updateHandler = () => {
-    updateData(text, participantData);
+  const updateHandler = async () => {
+    const res = await updateData(text, participantData);
+    if (res["status"] == 200) {
+      const res2 = await getData(text);
+      setParticipantData({...res2.data[0]});
+      console.log("Updated");
+    }
   }
 
   const RenderParticipant = () => {
@@ -82,14 +89,14 @@ export default function App() {
       <View style={styles.container}>
         <Text style={styles.participantText} key = "name">Name: {participantData.name}</Text>
         <Text style={styles.participantText} key = "team">Team: {participantData.team}</Text>
-        <Text style={styles.participantText} key = "registered" onPress = {() => toggleHandler("registered")}>Registered: {participantData.registered ? "Completed" : "Not Completed"}</Text>
-        <Text style={styles.participantText} key = "breakfast" onPress = {() => toggleHandler("breakfast")}>Breakfast: {participantData.breakfast ? "Completed" : "Not Completed"}</Text>
-        <Text style={styles.participantText} key = "lunch" onPress = {() => toggleHandler("lunch")}>Lunch: {participantData.lunch ? "Completed" : "Not Completed"}</Text>
-        <Text style={styles.participantText} key = "snacks" onPress = {() => toggleHandler("snacks")}>Snacks: {participantData.snacks ? "Completed" : "Not Completed"}</Text>
-        <Text style={styles.participantText} key = "dinner" onPress = {() => toggleHandler("dinner")}>Dinner: {participantData.dinner ? "Completed" : "Not Completed"}</Text>
-        <Text style={styles.participantText} key = "review1" onPress = {() => toggleHandler("review1")}>Review 1: {participantData.review1 ? "Completed" : "Not Completed"}</Text>
-        <Text style={styles.participantText} key = "review2" onPress = {() => toggleHandler("review2")}>Review 2: {participantData.review2 ? "Completed" : "Not Completed"}</Text>
-        <Text style={styles.participantText} key = "review3" onPress = {() => toggleHandler("review3")}>Review 3: {participantData.review3 ? "Completed" : "Not Completed"}</Text>
+        <Text style = {participantData.registered ? styles.good : styles.bad} key = "registered" onPress = {() => toggleHandler("registered")}>Registered: {participantData.registered ? "Completed" : "Not Completed"}</Text>
+        <Text style = {participantData.breakfast ? styles.good : styles.bad} key = "breakfast" onPress = {() => toggleHandler("breakfast")}>Breakfast: {participantData.breakfast ? "Completed" : "Not Completed"}</Text>
+        <Text style = {participantData.lunch ? styles.good : styles.bad} key = "lunch" onPress = {() => toggleHandler("lunch")}>Lunch: {participantData.lunch ? "Completed" : "Not Completed"}</Text>
+        <Text style = {participantData.snacks ? styles.good : styles.bad} key = "snacks" onPress = {() => toggleHandler("snacks")}>Snacks: {participantData.snacks ? "Completed" : "Not Completed"}</Text>
+        <Text style = {participantData.dinner ? styles.good : styles.bad} key = "dinner" onPress = {() => toggleHandler("dinner")}>Dinner: {participantData.dinner ? "Completed" : "Not Completed"}</Text>
+        <Text style = {participantData.review1 ? styles.good : styles.bad} key = "review1" onPress = {() => toggleHandler("review1")}>Review 1: {participantData.review1 ? "Completed" : "Not Completed"}</Text>
+        <Text style = {participantData.review2 ? styles.good : styles.bad} key = "review2" onPress = {() => toggleHandler("review2")}>Review 2: {participantData.review2 ? "Completed" : "Not Completed"}</Text>
+        <Text style = {participantData.review3 ? styles.good : styles.bad} key = "review3" onPress = {() => toggleHandler("review3")}>Review 3: {participantData.review3 ? "Completed" : "Not Completed"}</Text>
         <Button title = {'Update'} key = "update" onPress = {() => updateHandler()} color='tomato'/>
       </View>
     );
@@ -112,17 +119,24 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
   },
   maintext: {
     fontSize: 16,
     margin: 20,
+    color: "white"
   },
   participantText: {
     fontSize: 10,
     margin: 10,
+    paddingLeft:30,
+    paddingRight:30,
+    borderWidth: 1,
+    borderColor: "thistle",
+    color: "white",
+    borderRadius: 50,
   },
   barcodebox: {
     alignItems: 'center',
@@ -132,7 +146,29 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderRadius: 30,
     backgroundColor: 'tomato'
-  }
+  },
+  good: {
+    fontSize: 10,
+    margin: 10,
+    paddingLeft:30,
+    paddingRight:30,
+    borderWidth: 1,
+    borderColor: "thistle",
+    borderRadius: 50,
+    color: "white",
+    backgroundColor: 'green'
+  },
+  bad: {
+    fontSize: 10,
+    margin: 10,
+    paddingLeft:30,
+    paddingRight:30,
+    borderWidth: 1,
+    borderColor: "thistle",
+    borderRadius: 50,
+    color: "white",
+    backgroundColor: 'tomato'
+  },
 });
 
 registerRootComponent(App);
