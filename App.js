@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button, ScrollView } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { registerRootComponent } from 'expo';
 import { getData } from './helpers/getData';
@@ -35,7 +35,6 @@ export default function App() {
 
   // What happens when we scan the bar code
   const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
     setText(data);
     console.log('Data: ' + data)
     async function fetchDataParticipant() {
@@ -45,6 +44,7 @@ export default function App() {
       setParticipantData(res.data[0]);
     };
     fetchDataParticipant();
+    setScanned(true);
   };
 
   // Check permissions and return the screens
@@ -64,6 +64,7 @@ export default function App() {
 
   const scanAgainHandler = () => {
     setScanned(false);
+    setParticipantData(null);
   }
 
   const toggleHandler = (val) => {
@@ -86,6 +87,7 @@ export default function App() {
       return <Text style={styles.maintext}>Scan to see Participant Data</Text>
     }
     return (
+      <ScrollView>
       <View style={styles.container}>
         <Text style={styles.participantText} key = "name">Name: {participantData.name}</Text>
         <Text style={styles.participantText} key = "team">Team: {participantData.team}</Text>
@@ -97,8 +99,9 @@ export default function App() {
         <Text style = {participantData.review1 ? styles.good : styles.bad} key = "review1" onPress = {() => toggleHandler("review1")}>Review 1: {participantData.review1 ? "Completed" : "Not Completed"}</Text>
         <Text style = {participantData.review2 ? styles.good : styles.bad} key = "review2" onPress = {() => toggleHandler("review2")}>Review 2: {participantData.review2 ? "Completed" : "Not Completed"}</Text>
         <Text style = {participantData.review3 ? styles.good : styles.bad} key = "review3" onPress = {() => toggleHandler("review3")}>Review 3: {participantData.review3 ? "Completed" : "Not Completed"}</Text>
-        <Button title = {'Update'} key = "update" onPress = {() => updateHandler()} color='tomato'/>
+        <Button title = {' Update '} key = "update" onPress = {() => updateHandler()} color = 'tomato'/>
       </View>
+      </ScrollView>
     );
   }
 
@@ -129,14 +132,16 @@ const styles = StyleSheet.create({
     color: "white"
   },
   participantText: {
-    fontSize: 10,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 20,
     margin: 10,
     paddingLeft:30,
     paddingRight:30,
-    borderWidth: 1,
-    borderColor: "thistle",
+    width: '100%',
     color: "white",
-    borderRadius: 50,
+    fontWeight: 'bold',
   },
   barcodebox: {
     alignItems: 'center',
@@ -148,7 +153,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'tomato'
   },
   good: {
-    fontSize: 10,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    fontSize: 15,
     margin: 10,
     paddingLeft:30,
     paddingRight:30,
@@ -159,7 +168,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'green'
   },
   bad: {
-    fontSize: 10,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    fontSize: 15,
     margin: 10,
     paddingLeft:30,
     paddingRight:30,
