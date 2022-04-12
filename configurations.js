@@ -1,3 +1,3 @@
 export const confs = {
-    "base_url": "https://terrathon-backend-test.herokuapp.com"
-}
+    base_url: 'https://dotslash-3.herokuapp.com',
+};

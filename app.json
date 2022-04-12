@@ -1,34 +1,32 @@
 {
-  "expo": {
-    "name": "Terrathon",
-    "slug": "Terrathon",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/stickman_square.png",
-    "splash": {
-      "image": "./assets/stickman.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.cmsxalcoding.terrathon",
-    },
-    "android": {
-      "package": "com.cmsxalcoding.terrathon",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/stickman_square.png",
-        "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "favicon": "./assets/stickman.png"
+    "expo": {
+        "name": "DotSlash 3.0",
+        "slug": "DotSlash",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/stickman_square.png",
+        "splash": {
+            "image": "./assets/stickman.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "updates": {
+            "fallbackToCacheTimeout": 0
+        },
+        "assetBundlePatterns": ["**/*"],
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "com.cmsxalcoding.terrathon"
+        },
+        "android": {
+            "package": "com.cmsxalcoding.terrathon",
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/stickman_square.png",
+                "backgroundColor": "#FFFFFF"
+            }
+        },
+        "web": {
+            "favicon": "./assets/stickman.png"
+        }
     }
-  }
 }
